@@ -1,4 +1,5 @@
 var express = require('express');
+var ideasUtils = require('./utils/ideas');
 var app = express();
 
 var ideas = [{
@@ -19,9 +20,7 @@ var ideas = [{
 }];
 
 app.get('/api/getAll', function (req, res) {
-  var sortedIdeas = ideas.sort(function (a, b) {
-    return a.priority > b.priority;
-  });
+  var sortedIdeas = ideasUtils.sortByPriority(ideas);
   res.send(sortedIdeas);
 });
 
