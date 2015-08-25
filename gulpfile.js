@@ -4,7 +4,7 @@ var gulp = require('gulp'),
   mocha = require('gulp-mocha'),
   nodemon = require('gulp-nodemon');
 
-var testSrc = './test/*';
+var testSrc = './server/test/*';
 
 gulp.task('nodemon', function () {
   nodemon({

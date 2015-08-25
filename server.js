@@ -1,5 +1,5 @@
 var express = require('express');
-var ideasUtils = require('./utils/ideas');
+var ideasUtils = require('./server/utils/ideas');
 var app = express();
 
 var ideas = [{
@@ -19,9 +19,17 @@ var ideas = [{
   date: new Date()
 }];
 
+
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/front', express.static(__dirname + '/front'));
+
 app.get('/api/getAll', function (req, res) {
   var sortedIdeas = ideasUtils.sortByPriority(ideas);
   res.send(sortedIdeas);
 });
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
 
 app.listen(3000);
+console.log('Server start on port 3000');
