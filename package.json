@@ -2,7 +2,8 @@
   "name": "idea-box",
   "version": "0.0.1",
   "dependencies": {
-    "express": "~4.13.3"
+    "express": "~4.13.3",
+    "body-parser": "~1.13.3"
   },
   "devDependencies": {
     "gulp": "~3.9.0",

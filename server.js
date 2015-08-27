@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var ideasUtils = require('./server/utils/ideas');
 var app = express();
 
@@ -22,13 +23,28 @@ var ideas = [{
 
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use('/front', express.static(__dirname + '/front'));
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
 
 app.get('/api/getAll', function (req, res) {
   var sortedIdeas = ideasUtils.sortByPriority(ideas);
   res.send(sortedIdeas);
 });
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
+app.post('/api/add', function (req, res) {
+  var idea = req.body.idea;
+  if (!idea) {
+    res.sendStatus(404);
+    return;
+  }
+  ideas.push(idea);
+  res.sendStatus(200);
 });
 
 app.listen(3000);
