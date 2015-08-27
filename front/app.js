@@ -1,1 +1,1 @@
-angular.module("myIdeaBox", []);
+angular.module("myIdeaBox", ['ui.bootstrap']);

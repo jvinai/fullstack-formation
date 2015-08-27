@@ -5,7 +5,7 @@ var app = express();
 var ideas = [{
   text: 'I should buy a boat',
   priority: 2,
-  isDone: false,
+  isDone: true,
   date: new Date()
 }, {
   text: 'I should write a book',
