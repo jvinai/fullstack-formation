@@ -5,14 +5,15 @@
   <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="./front/css/app.css">
-  <script src="./bower_components/angular/angular.js"></script>
-  <script src="./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="./bower_components/angular/angular.min.js"></script>
+  <script src="./bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="./bower_components/angular-route/angular-route.min.js"></script>
   <script src="./front/app.js"></script>
   <script src="./front/service/myService.js"></script>
   <script src="./front/controller/myController.js"></script>
   <title></title>
 </head>
-<body ng-app="myIdeaBox" ng-controller="myCtrl as c">
+<body ng-app="myIdeaBox">
 
 <div class="container">
   <div class="jumbotron">
@@ -20,9 +21,7 @@
     <p>Where i share all my ideas.</p>
   </div>
 </div>
+<div ng-view></div>
 
-  <div class="container ideas" ng-repeat="idea in ideas">
-    <div class="col-8 alert " ng-class="{'alert-success': idea.isDone, 'alert-info': !idea.isDone}" >{{idea.text}}</div>
-  </div>
 </body>
 </html>

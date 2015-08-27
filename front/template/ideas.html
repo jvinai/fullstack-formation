@@ -1,0 +1,6 @@
+<div class="container button-zone">
+  <a class="btn btn-success" href="#/add">Add</a>
+</div>
+<div class="container ideas" ng-repeat="idea in ideas">
+  <div class="col-8 alert" ng-class="{'alert-success': idea.isDone, 'alert-info': !idea.isDone}">{{idea.text}}</div>
+</div>
