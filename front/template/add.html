@@ -1,3 +1,24 @@
 <div class="container button-zone">
   <a class="btn btn-success" href="#/">Back</a>
 </div>
+
+<div class="container add-form">
+  <form ng-submit="c.submitForm()">
+    <fieldset>
+      <legend>Add an idea:</legend>
+      <label for="text">Text:</label>
+      <input id="text" type="text" ng-model="idea.text">
+      <label for="priority">Priority:</label>
+      <select id="priority" ng-model="idea.priority">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      <input type="submit" value="Submit" class="btn btn-success">
+      <div>
+        {{message}}
+      </div>
+    </fieldset>
+  </form>
+
+</div>

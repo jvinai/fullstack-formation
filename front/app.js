@@ -5,7 +5,8 @@ angular.module("myIdeaBox", ['ui.bootstrap', 'ngRoute']).config(function ($route
       controller: 'myCtrl as c'
     })
     .when('/add', {
-      templateUrl: 'front/template/add.html'
+      templateUrl: 'front/template/add.html',
+      controller: 'addCtrl as c'
     })
     .otherwise({templateUrl: 'default.html'})
 });
