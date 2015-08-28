@@ -19,6 +19,7 @@ angular.module("myIdeaBox").factory('myService', function ($q, $http) {
       }
     },
     addIdea: function (idea) {
+      ideas = [];
       return $http({
         url: '/api/add',
         method: 'POST',
@@ -34,6 +35,15 @@ angular.module("myIdeaBox").factory('myService', function ($q, $http) {
         data: {
           idea: idea
         }
+      });
+    },
+    deleteIdea: function(id) {
+      _.remove(ideas, function(item) {
+        return item.id == id;
+      });
+      return $http({
+        url: '/api/delete/' + id,
+        method: 'DELETE',
       });
     },
     extractIdea: function (id) {

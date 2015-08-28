@@ -26,6 +26,15 @@ var ideasRoute = {
       ideasCtrl.modifyIdea(idea);
       res.sendStatus(200);
     });
+    app.delete('/api/delete/:id', function (req, res) {
+      var id = req.params.id;
+      if (!id) {
+        res.sendStatus(404);
+        return;
+      }
+      ideasCtrl.deleteIdea(id);
+      res.sendStatus(200);
+    });
 
   }
 };

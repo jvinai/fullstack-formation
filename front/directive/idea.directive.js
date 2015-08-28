@@ -6,6 +6,11 @@ angular.module("myIdeaBox").directive('idea', function () {
       idea: '='
     },
     restrict: 'A',
+    controller:function($scope) {
+      $scope.deleteIdea = function() {
+        $scope.$emit('delete-idea', $scope.idea.id);
+      }
+    },
     templateUrl: 'front/directive/idea.html'
   };
 });

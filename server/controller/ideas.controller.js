@@ -31,10 +31,13 @@ var ideasCtrl = {
     ideas.push(idea);
   },
   modifyIdea: function (idea) {
-    _.remove(ideas, function (item) {
-      return idea.id === item.id;
-    });
+    this.deleteIdea(idea.id);
     ideas.push(idea);
+  },
+  deleteIdea: function (id) {
+    _.remove(ideas, function (item) {
+      return id === item.id;
+    });
   }
 };
 
