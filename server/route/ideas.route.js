@@ -3,7 +3,7 @@
 var ideasCtrl = require('./../controller/ideas.controller');
 
 var ideasRoute = {
-  initRoute: function(app) {
+  initRoute: function (app) {
     app.get('/api/getAll', function (req, res) {
       var sortedIdeas = ideasCtrl.getIdeas();
       res.send(sortedIdeas);
@@ -17,6 +17,16 @@ var ideasRoute = {
       ideasCtrl.addIdea(idea);
       res.sendStatus(200);
     });
+    app.post('/api/modify', function (req, res) {
+      var idea = req.body.idea;
+      if (!idea) {
+        res.sendStatus(404);
+        return;
+      }
+      ideasCtrl.modifyIdea(idea);
+      res.sendStatus(200);
+    });
+
   }
 };
 

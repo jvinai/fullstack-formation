@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "~4.13.3",
-    "body-parser": "~1.13.3"
+    "body-parser": "~1.13.3",
+    "uniqid": "~1.0.0",
+    "lodash": "~3.10.1"
   },
   "devDependencies": {
     "gulp": "~3.9.0",

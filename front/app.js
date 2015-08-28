@@ -8,5 +8,9 @@ angular.module("myIdeaBox", ['ui.bootstrap', 'ngRoute']).config(function ($route
       templateUrl: 'front/template/add.html',
       controller: 'addCtrl as c'
     })
-    .otherwise({templateUrl: 'default.html'})
+    .when('/modify/:id', {
+      templateUrl: 'front/template/add.html',
+      controller: 'modifyCtrl as c'
+    })
+    .otherwise({redirectTo: '/'})
 });

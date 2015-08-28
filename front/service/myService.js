@@ -1,12 +1,22 @@
 'use strict';
 
-angular.module("myIdeaBox").factory('myService', function ($http) {
+angular.module("myIdeaBox").factory('myService', function ($q, $http) {
+  var ideas = [];
   return {
     getIdeas: function () {
-      return $http({
-        url: '/api/getAll',
-        method: 'GET'
-      });
+      if (ideas.length > 0) {
+        return $q.resolve(ideas);
+      } else {
+        return $http({
+          url: '/api/getAll',
+          method: 'GET'
+        }).then(function (xhr) {
+          ideas = xhr.data;
+          return ideas;
+        }, function (error) {
+          return $q.reject(error);
+        });
+      }
     },
     addIdea: function (idea) {
       return $http({
@@ -16,6 +26,24 @@ angular.module("myIdeaBox").factory('myService', function ($http) {
           idea: idea
         }
       });
+    },
+    modifyIdea: function (idea) {
+      return $http({
+        url: '/api/modify',
+        method: 'POST',
+        data: {
+          idea: idea
+        }
+      });
+    },
+    extractIdea: function (id) {
+      return this.getIdeas().then(function (ideas) {
+        return _.find(ideas, function (idea) {
+          return idea.id == id;
+        }, function (error) {
+          return $q.reject(error);
+        })
+      })
     }
   }
 
