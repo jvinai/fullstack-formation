@@ -19,6 +19,7 @@ angular.module("myIdeaBox").factory('myService', function ($q, $http) {
       }
     },
     addIdea: function (idea) {
+      ideas = [];
       return $http({
         url: '/api/add',
         method: 'POST',
