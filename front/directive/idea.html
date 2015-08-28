@@ -1,1 +1,4 @@
-<div class="col-8 alert" ng-class="{'alert-success': idea.isDone, 'alert-info': !idea.isDone}">{{idea.text}} <a href="#/modify/{{idea.id}}" class="btn btn-default button-modify">Modify</a> </div>
+<div class="col-8 alert" ng-class="{'alert-success': idea.isDone, 'alert-info': !idea.isDone}">{{idea.text}}
+  <a href="#/modify/{{idea.id}}" class="btn btn-default button-modify">Modify</a>
+  {{idea.date | date : 'dd/MM/yyyy'}} {{idea.priority | priority}}
+</div>
