@@ -2,6 +2,8 @@
 var uniqid = require('uniqid');
 var _ = require('lodash');
 var ideasUtils = require('./../utils/ideas');
+var IdeaSchema = require('./../schema/idea.schema');
+var bluebird = require('bluebird');
 var ideas = [{
   id: uniqid(),
   text: 'I should buy a boat',
@@ -24,19 +26,53 @@ var ideas = [{
 
 var ideasCtrl = {
   getIdeas: function () {
-    return ideasUtils.sortByPriority(ideas);
+    return new bluebird(function (resolve, reject) {
+      IdeaSchema.find({}, null, {
+        sort: {
+          priority: 1
+        }
+      }, function (error, ideas) {
+        if (error) {
+          reject(error);
+          return;
+        }
+        resolve(ideas);
+      });
+    });
   },
   addIdea: function (idea) {
-    idea.id = uniqid();
-    ideas.push(idea);
+    return new bluebird(function (resolve, reject) {
+      idea.id = uniqid();
+      var ideaSchema = new IdeaSchema(idea);
+      ideaSchema.save(function (error) {
+        if (error) {
+          reject(error);
+          return;
+        }
+        resolve();
+      });
+    });
   },
   modifyIdea: function (idea) {
-    this.deleteIdea(idea.id);
-    ideas.push(idea);
+    return new bluebird(function (resolve, reject) {
+      IdeaSchema.findOneAndUpdate({id: idea.id}, idea, function (error) {
+        if (error) {
+          reject(error);
+          return;
+        }
+        resolve();
+      });
+    });
   },
   deleteIdea: function (id) {
-    _.remove(ideas, function (item) {
-      return id === item.id;
+    return new bluebird(function (resolve, reject) {
+      IdeaSchema.findOneAndRemove({id: id}, function (error) {
+        if (error) {
+          reject(error);
+          return;
+        }
+        resolve();
+      });
     });
   }
 };

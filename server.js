@@ -1,12 +1,13 @@
 var express = require('express');
 var ideasRoute = require('./server/route/ideas.route');
 var bodyParser = require('body-parser');
+var Mongoose = require('./server/repository/mongoose.repository');
 var app = express();
 
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use('/front', express.static(__dirname + '/front'));
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 
 // parse application/json
 app.use(bodyParser.json());
@@ -16,6 +17,7 @@ app.get('/', function (req, res) {
 });
 
 ideasRoute.initRoute(app);
-
+var mongoose = new Mongoose({url: 'mongodb://localhost/ideas'});
+mongoose.init();
 app.listen(3000);
 console.log('Server start on port 3000');
